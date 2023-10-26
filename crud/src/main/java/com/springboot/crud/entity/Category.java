@@ -1,5 +1,6 @@
 package com.springboot.crud.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,5 +22,6 @@ public class Category {
     @Column(unique = true, nullable = false)
     private String categoryName;
     @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private Set<Product> products = new HashSet<>();
 }
