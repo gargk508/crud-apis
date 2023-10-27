@@ -1,12 +1,13 @@
 package com.springboot.crud.service;
 
-import com.springboot.crud.entity.Product;
+import com.springboot.crud.payload.ProductDto;
+
 import java.util.List;
 
 public interface ProductService {
-    List<Product> getProducts();
-    Product getProductById(int id);
+    List<ProductDto> getProducts();
+    ProductDto getProductById(int id);
     void deleteProduct(int id);
-    Product createProduct(Product product, int catId);
-    Product updateProduct(int id, Product product);
+    ProductDto createProduct(ProductDto product, int catId);
+    ProductDto updateProduct(int id, ProductDto product);
 }
