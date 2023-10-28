@@ -1,6 +1,7 @@
 package com.springboot.crud.service.impl;
 
 import com.springboot.crud.entity.Category;
+import com.springboot.crud.exception.ResourceNotFoundException;
 import com.springboot.crud.payload.CategoryDto;
 import com.springboot.crud.repository.CategoryRepository;
 import com.springboot.crud.service.CategoryService;
@@ -25,13 +26,15 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public CategoryDto getCategoryById(int id){
-        Category category = categoryRepository.findById(id).orElseThrow();
+        Category category = categoryRepository.findById(id).
+                orElseThrow(()->new ResourceNotFoundException("Category", "id", String.valueOf(id)));
         return this.modelMapper.map(category, CategoryDto.class);
     }
 
     @Override
     public void deleteCategory(int id) {
-        Category category = categoryRepository.findById(id).orElseThrow();
+        Category category = categoryRepository.findById(id).
+                orElseThrow(()->new ResourceNotFoundException("Category", "id", String.valueOf(id)));
         categoryRepository.delete(category);
     }
 
@@ -44,7 +47,8 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public CategoryDto updateCategory(int id, CategoryDto category) {
-        Category cat = categoryRepository.findById(id).orElseThrow();
+        Category cat = categoryRepository.findById(id).
+                orElseThrow(()->new ResourceNotFoundException("Category", "id", String.valueOf(id)));
         cat.setCategoryName(category.getCategoryName());
         Category updatedCategory = categoryRepository.save(cat);
         return this.modelMapper.map(updatedCategory, CategoryDto.class);

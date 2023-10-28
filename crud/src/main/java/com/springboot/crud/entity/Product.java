@@ -20,7 +20,7 @@ public class Product {
     private String productName;
     private Double price;
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category_id", nullable = false)
     @JsonBackReference
     private Category category;
 }
